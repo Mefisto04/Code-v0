@@ -3,7 +3,7 @@ public:
     int removeAlmostEqualCharacters(string word) {
         int temp = 0;
         for (int i = 1; i < word.size(); ++i) {
-            if (word[i] == word[i - 1] || abs(word[i] - word[i - 1]) == 1) {
+            if (word[i] == word[i - 1]) {
                 temp++;
                 i++;
             }
