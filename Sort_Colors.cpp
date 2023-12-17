@@ -13,12 +13,12 @@ public:
             }
            else if(nums[m]==1)
             {
-                m--;
+                m++;
             }
             else if(nums[m]==2)
             {
                 swap(nums[m],nums[e]);
-                e++;
+                e--;
             }
         }
 
