@@ -11,42 +11,61 @@ public:
             m[value]++;
         }
 
-        unordered_map<char,deque<int> > position;
-        set<int> sorted;
-        pair<int,int> res = {0,INT_MAX},initial;
-        initial = {0,INT_MAX};
-        for (int i = 0 ; i < s.size() ; i++){
-            if (m.find(s[i]) != m.end()){
-                
-                position[s[i]].push_back(i);
-                sorted.insert(i);
+        unordered_map<char,int> temp = m;
+        int left = 0;
+        int right = 0;
+        int min_len = INT_MAX;
+        int curr_len;
+        string res;
 
-                //we have too much so remove stuff
-                if (m[s[i]] < position[s[i]].size()){
-                    int temp = position[s[i]].front();
-                    position[s[i]].pop_front();
-                    sorted.erase(temp);
+        while (right < s.size()){
+            
+            // cout<<"current\t"<<s[right]<<"\t";
+
+            //found the element
+            if (temp.find(s[right]) != temp.end()){
+
+                // cout<<"found the element\t"<<temp[s[right]]<<"\n";
+
+                if (temp[s[right]] == 1){
+                    temp.erase(s[right]);
                 }
-
-                if (sorted.size() == t.size()){
-                    if (res.second - res.first > i - *sorted.begin()){
-                        res = {*sorted.begin(),i};
-                        cout<<"res being updated\t"<<res.first<<"\t"<<res.second<<endl;
+                else{
+                    temp[s[right]]--;
+                }
+                // cout<<"temp is now of size  "<<temp.size()<<endl;
+                if (temp.size() == 0){
+                    // cout<<"temp is empty now\t";
+                    curr_len = right - left + 1;
+                    
+                    // cout<<"curr_len and min_len is "<<curr_len<<"\t"<<min_len<<endl;
+                    if (curr_len < min_len){
+                        min_len = min(min_len,curr_len);
+                        res = s.substr(left,curr_len);
                     }
+                    temp = m;
+                    right = left;
+                    left++;
                 }
+
+                
+
             }
-        }
-        cout<<res.first<<"\t"<<res.second<<endl;
-        string ans;
-        if (res != initial){
-            ans = s.substr(res.first,res.second - res.first + 1);
-        }
 
-        else{
-            ans = "";
-        }
+            //not found the element
+            else{
+                if (temp == m){
+                    left++;
+                }
+                // left++;
+                // cout<<"not found the element so keep going\n";
+            }
 
-        return ans;
+            right++;
+
+        }
+        
+        return res;
+
     }
-
 };
