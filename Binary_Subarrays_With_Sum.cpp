@@ -8,7 +8,7 @@ public:
         int sum = 0;
         std::unordered_map<int, int> prefixSumCount; 
         prefixSumCount[0] = 1;
-        for (int num = 0; num< nums.size(); num++) {
+        for (int num : nums) {
             sum += num;
             count += prefixSumCount[sum - goal];
             prefixSumCount[sum]++;
