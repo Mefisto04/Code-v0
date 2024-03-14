@@ -11,7 +11,7 @@ public:
 
         while (right < nums.size()) {
             sum += nums[right];
-            while (left < right && sum > goal) {
+            while (sum > goal) {
                 sum -= nums[left++];
             }
             if (sum == goal) {
