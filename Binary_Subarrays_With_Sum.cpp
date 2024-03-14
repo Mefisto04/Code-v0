@@ -1,18 +1,30 @@
 #include <vector>
-#include <unordered_map>
+using namespace std;
 
 class Solution {
 public:
-    int numSubarraysWithSum(std::vector<int>& nums, int goal) {
+    int numSubarraysWithSum(vector<int>& nums, int goal) {
         int count = 0;
         int sum = 0;
-        std::unordered_map<int, int> prefixSumCount; 
-        prefixSumCount[0] = 1;
-        for (int num : nums) {
-            sum += num;
-            count += prefixSumCount[sum - goal];
-            prefixSumCount[sum]++;
+        int left = 0;
+        int right = 0;
+
+        while (right < nums.size()) {
+            sum += nums[right];
+            while (left < right && sum > goal) {
+                sum -= nums[left++];
+            }
+            if (sum == goal) {
+                int temp = left;
+                while (temp < right && nums[temp] == 0) {
+                    count++;
+                    temp++;
+                }
+                count++;
+            }
+            right++;
         }
+
         return count;
     }
 };
