@@ -24,6 +24,6 @@ public:
         prev->next = list2;  
         temp2->next = curr->next; 
         
-        return curr;  
+        return temp2;  
     }
 };
