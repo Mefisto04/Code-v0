@@ -1,32 +1,24 @@
 class Solution {
 public:
-    
-    int countSubarraysWithAtMostKDistinct(vector<int>& nums, int k){
-        int n=nums.size();
+    int subarraysWithKDistinct(vector<int>& arr, int k) {
+        int cogs=0; 
+        int count = 0, n = arr.size(), si = 0, ei = 0;
+        int freq[20000 + 1];
         
-        unordered_map<int, int> mp;
         
-        int i=0, j=0;
-        
-        int c=0;
-        
-        while(j<n){
-            mp[nums[j]]++;
+        while (ei<n) {
+            if (ei<n && freq[arr[ei++]]++ == 0) count++;
             
-            while(i<=j && mp.size()>k){
-                if(--mp[nums[i]] == 0) mp.erase(nums[i]);
-                i++;
+            if(count==k) cogs++;
+            
+            if (count > k || ei==n) {
+                si++;
+                ei=si;
+                count = 0;
+                int freq[20000 + 1];
             }
             
-            c += (j-i+1);
-            
-            j++;
         }
-        
-        return c;
-    }
-    
-    int subarraysWithKDistinct(vector<int>& nums, int k) {
-        return countSubarraysWithAtMostKDistinct(nums,k)-countSubarraysWithAtMostKDistinct(nums,k-1);
+        return cogs;
     }
 };
