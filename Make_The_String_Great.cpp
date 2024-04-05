@@ -1,0 +1,15 @@
+class Solution {
+public:
+    string makeGood(string& s) {
+        int n=s.size();
+        string ans=string(1, s[0]);
+        for(int i=1; i<n; i++){
+            if (!ans.empty() && s[i]!=ans.back() 
+            && (s[i]&31)==(ans.back()&31))
+                ans.pop_back();
+            else 
+                ans.push_back(s[i]);
+        }
+        return ans;
+    }
+};
