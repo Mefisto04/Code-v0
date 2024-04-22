@@ -1,35 +1,27 @@
-class Solution {
-public:
-    unordered_map<string,bool>visited;
-    int BFS(string source, string target)
-    {
-        int ans = 0;
-        queue<string>q; 
-        if(!visited[source]) q.push(source);
-        while(!q.empty())
-        {
-            int n = q.size();
-            while(n--)
-            {
-                string par = q.front(); q.pop();
-                if(par == target) return ans;
-                for(int i=0;i<4;i++)
-                {
-                    string tmp = par, tmp2 = par;
-                    tmp[i] += 1, tmp2[i] -= 1;
-                    if(tmp[i]==':') tmp[i] = '0';
-                    if(tmp2[i] == '/') tmp2[i] = '9';
-                    if(!visited[tmp]) visited[tmp] = true, q.push(tmp);
-                    if(!visited[tmp2]) visited[tmp2] = true, q.push(tmp2);
-                }
-            }
-            ans++;
-        }
-        return -1;
-    }
-    int openLock(vector<string>& deadends, string target) 
-    {
-        for(auto s:deadends) visited[s] = true;
-        return BFS("0000", target);
-    }
-};
+int openLock(vector<string>& deadends, string target) {
+	unordered_set<string> dead(begin(deadends), end(deadends)), seen({"0000"});
+	if(dead.find("0000") != end(dead)) return -1; // if start string itself is a deadend
+	if(target == "0000") return 0; // if start string itself is the target string.
+	queue<string> q({"0000"});
+	int n, minTurns = 0;
+	while(!q.empty()) {            
+		n = size(q), minTurns++;
+		for(int i = 0; i < n; i++) { // traversing all nodes on the current level of BFS traversal
+			auto cur_str = q.front(); q.pop();       
+			// Trying forward and backward turn for each digit of current string
+			for(int j = 0; j < 4; j++) 
+				for(auto adj_str : turn(cur_str, j)) 
+					if(seen.find(adj_str) == end(seen) && dead.find(adj_str) == end(dead)) // adjacent (turned) string is not visited earlier, nor a dead end
+						if(adj_str == target) return minTurns;
+						else q.push(adj_str), seen.insert(adj_str);
+		}
+	}
+	return -1;
+}
+// turns the ith digit of s in forward and backward direction and returns the turned string as vector
+vector<string> turn(string s, int i) {
+	vector<string> res(2, s);
+	res[0][i] = '0' + (res[0][i] - '0' + 1) % 10;        // forward turn
+	res[1][i] = '0' + (res[1][i] - '0' - 1 + 10) % 10;   // backward turn
+	return res;
+}
