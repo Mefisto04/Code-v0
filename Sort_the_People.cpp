@@ -12,5 +12,4 @@ public:
             sorted[n-i-1]=p[heights[i]];
         }
         return sorted;
-    }
 };
