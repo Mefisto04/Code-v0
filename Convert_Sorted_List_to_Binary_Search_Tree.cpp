@@ -27,7 +27,7 @@ public:
         ListNode* fast = start;
         while(fast->next!=end){
             slow = slow->next;
-            fast = fast->next->next;
+            fast = fast->next;
         }
         TreeNode* head = new TreeNode(slow->val);
         head->left = solve(start,slow);
