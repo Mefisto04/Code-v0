@@ -31,7 +31,7 @@ public:
         }
         TreeNode* head = new TreeNode(slow->val);
         head->left = solve(start,slow);
-        head->right = solve(slow->next,end);
+        head->right = solve(slow,end);
         return head;
     }
     TreeNode* sortedListToBST(ListNode* head) {
