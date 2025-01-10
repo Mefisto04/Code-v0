@@ -25,13 +25,13 @@ public:
         if(start == end) return NULL;
         ListNode* slow = start;
         ListNode* fast = start;
-        while(fast!=end && fast->next!=end){
+        while(fast->next!=end){
             slow = slow->next;
             fast = fast->next->next;
         }
         TreeNode* head = new TreeNode(slow->val);
         head->left = solve(start,slow);
-        head->right = solve(slow,end);
+        head->right = solve(slow->next,end);
         return head;
     }
     TreeNode* sortedListToBST(ListNode* head) {
