@@ -1,6 +1,5 @@
 class Solution {
-    public :
-    boolean doesValidArrayExist(int[] derived) {
+    public boolean doesValidArrayExist(int[] derived) {
         int n=derived.length;
         int[] org=new int[n];
 
