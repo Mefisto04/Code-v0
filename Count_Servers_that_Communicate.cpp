@@ -12,7 +12,7 @@ public:
                 }
             }
         }
-        for(int i=0; i<m; i++){
+        for(int i=0; i<=m; i++){
             for(int j=0; j<n; j++){
                 if (grid[i][j]&& row[i]==1 && col[j]==1){
                     cnt--;
