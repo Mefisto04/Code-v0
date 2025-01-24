@@ -21,7 +21,7 @@ public:
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
         int n = graph.size();
         vector<bool> visit(n), inStack(n);
-        for (int i = 1; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             dfs(i, graph, visit, inStack);
         }
         vector<int> safeNodes;
