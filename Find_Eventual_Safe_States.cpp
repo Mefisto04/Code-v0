@@ -25,7 +25,7 @@ public:
             dfs(i, graph, visit, inStack);
         }
         vector<int> safeNodes;
-        for (int i = 1; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             if (!inStack[i]) {
                 safeNodes.push_back(i);
             }
