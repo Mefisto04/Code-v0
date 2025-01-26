@@ -31,7 +31,7 @@ public:
             if (!vis[i]) {
                 int c = i, len = 0;
                 while (!vis[c]) {
-                    vis[c] = true;
+                    
                     c = favorite[c];
                     len++;
                 }
