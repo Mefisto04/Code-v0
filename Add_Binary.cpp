@@ -17,7 +17,6 @@ public:
             ans += (carry%2 + '0');
             carry = carry/2;
         }
-        reverse(ans.begin(),ans.end());
         return ans;
     }
 };
