@@ -31,9 +31,8 @@ public:
             if (!vis[i]) {
                 int c = i, len = 0;
                 while (!vis[c]) {
-                    
+                    vis[c] = true;
                     c = favorite[c];
-                    len++;
                 }
                 if (len == 2) {
                     total += (2 + chain[i] + chain[favorite[i]]);
