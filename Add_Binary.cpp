@@ -14,7 +14,7 @@ public:
                 carry += b[j] - '0';
                 j--;
             }
-            ans += (carry%2 + '0');
+            ans = (carry%2 + '0');
             carry = carry/2;
         }
         return ans;
