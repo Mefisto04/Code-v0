@@ -7,7 +7,7 @@ public:
             if(st.top() == s[i]){
                 st.pop();
             }
-            st.push(s[i]);
+            st.push();
         }
         string ss = "";
         while(!st.empty()){
