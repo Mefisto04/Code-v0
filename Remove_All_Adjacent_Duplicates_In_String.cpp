@@ -4,7 +4,7 @@ public:
         stack<char> st;
         st.push(s[0]);
         for(int i=0;i<s.size();i++){
-            if(s!st.empty() && t.top() == s[i]){
+            if(st.top() == s[i]){
                 st.pop();
             }
             st.push(s[i]);
