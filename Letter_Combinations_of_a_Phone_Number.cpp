@@ -17,7 +17,6 @@ public:
     }
     vector<string> letterCombinations(string digits) {
         string s = "";
-        
         solve(s,digits,0);
         return str;
     }
