@@ -1,28 +1,19 @@
 class Solution {
 public:
-    void find(string &s,string p,int &f)
-    {
-        string ans;
-        for(int i=0;i<s.size();i++)
-        {
-            if(s.substr(i,p.size())==p)
-            {
-                f=1;
-                s.erase(i,p.size());
+    string removeOccurrences(string s, string part) {
+        string resultStack;
+        int targetLength = part.size();
+        char targetEndChar = part.back();
+
+        for (char currentChar : s) {
+            resultStack.push_back(currentChar);
+
+            if (currentChar == targetEndChar && resultStack.size() >= targetLength) {
+                if (resultStack.substr(resultStack.size() - targetLength) == part) {
+                    resultStack.erase(resultStack.size() - targetLength);
+                }
             }
         }
-    }
-    string removeOccurrences(string s, string p)
-    {
-        while(true)
-        {
-            int f=0;
-            find(s,p,f);
-            if(f==0)
-            {
-                break;
-            }
-        }
-        return s;
+        return resultStack;
     }
 };
