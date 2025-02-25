@@ -7,7 +7,7 @@ public:
         int left = 0;
         int right = n-1;
         while(left<right){
-            double avg = (nums[right]+nums[left])/(2*1.0);
+            double avg = (nums[right]+nums[left])/2;
             ans.push_back(avg);
             left++;
             right--;
