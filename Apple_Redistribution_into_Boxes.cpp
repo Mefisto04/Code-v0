@@ -1,31 +1,20 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
 class Solution {
 public:
-    int minimumBoxes(std::vector<int>& apple, std::vector<int>& capacity) {
-        int total_apples = 0;
-        int total_capacity = 0;
-
-        if (apple.empty()) return 0; // No apples to store
-        
-        // Sort containers in descending order
-        std::sort(capacity.begin(), capacity.end(), std::greater<int>());
-        
-        // Compute total apples
-        for (int apples : apple) {
-            total_apples += apples;
+    int minimumBoxes(vector<int>& apple, vector<int>& capacity) {
+        int n = apple.size();
+        int m = capacity.size();
+        int total = 0;
+        for(int i = 0;i<n;i++){
+            total += apple[i];
         }
-
-        // Fill containers greedily
-        for (int i = 0; i < capacity.size(); i++) {
-            total_capacity += capacity[i];
-            if (total_capacity >= total_apples) {
-                return i + 1; // Minimum containers used
+        int ans = 0;
+        reverse(capacity.begin(),capacity.end());
+        for(int i=0;i<m;i++){
+            ans += capacity[i];
+            if(ans>=total){
+                return i+1;
             }
         }
-        
-        return 0; // Not enough containers
+        return 0;
     }
 };
