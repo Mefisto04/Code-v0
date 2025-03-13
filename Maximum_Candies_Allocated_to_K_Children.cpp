@@ -1,29 +1,33 @@
+#include <vector>
+#include <algorithm>
+using namespace std;
+
 class Solution {
 public:
-    int maximumCandies(vector<int>& candies, long long k) {
-        auto canAllocate = [&](vector<int>& candies, long long k, int pileSize) {
-            if (pileSize == 0) return true;
-            long long totalPiles = 0;
-            for (int candy : candies) {
-                totalPiles += candy / pileSize;
-                if (totalPiles >= k) return true;
-            }
-            return false;
-        };
-        
-        long long sum = 0;
-        for (int candy : candies) sum += candy;
-        if (sum < k) return 0;
+    int maximumCandies(vector<int>& candies, int k) {
+        int left = 1, right = *max_element(candies.begin(), candies.end());
+        long long total = 0;
+        for (int c : candies) total += c;
+        if (total < k) return 0; // Not enough candies
 
-        int low = 1, high = *max_element(candies.begin(), candies.end());
-        while (low < high) {
-            int mid = (low + high + 1) / 2;
-            if (canAllocate(candies, k, mid)) {
-                low = mid;
+        int result = 0;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (canDistribute(candies, k, mid)) {
+                result = mid;
+                left = mid + 1;
             } else {
-                high = mid - 1;
+                right = mid - 1;
             }
         }
-        return low;
+
+        return result;
+    }
+
+private:
+    bool canDistribute(vector<int>& candies, int k, int val) {
+        int count = 0;
+        for (int c : candies) count += c / val;
+        return count >= k;
     }
 };
