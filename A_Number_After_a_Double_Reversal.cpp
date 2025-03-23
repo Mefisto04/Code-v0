@@ -5,5 +5,6 @@ public:
             return true;
         if (num % 10 == 0)
             return false;
+        return true;
     }
 };
