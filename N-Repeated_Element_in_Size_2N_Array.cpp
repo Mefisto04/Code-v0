@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int repeatedNTimes(vector<int>& A) {
+    int repeatedNTimes(vector<int>& nums) {
         unordered_set<int> seen;
         for (int a: A) {
             if (seen.count(a))
