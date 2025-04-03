@@ -1,5 +1,3 @@
-class Solution {
-public:
     int repeatedNTimes2(vector<int>& A) {
         unordered_set<int> seen;
         for (int a: A) {
@@ -8,4 +6,3 @@ public:
             seen.insert(a);
         }
     }
-};
