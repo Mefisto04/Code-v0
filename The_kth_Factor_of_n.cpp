@@ -5,6 +5,7 @@ public:
         for(int i=1;i<=n;i++){
             if(n%i==0) a.push_back(i);
         }
-        return a[k-1];
+        if(k>a.size()) return -1;
+        else return a[k-1];
     }
 };
