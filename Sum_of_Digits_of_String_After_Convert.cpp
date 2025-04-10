@@ -1,17 +1,13 @@
 class Solution {
 public:
     int getLucky(string s, int k) {
-        string digits = "";
-        for (char c : s)
-            digits += to_string(c - 'a' + 1);
-
-        for (int i = 0; i < k; i++) {
-            int sum = 0;
-            for (char d : digits)
-                sum += d - '0';
-            digits = to_string(sum);
+        int first=0;
+        int temp = 0;
+        for(int i=0;i<s.size();i++)
+            first=first*10 + (s[i]-'a');
+        for(int i=0;i<k;i++){
+            temp = sum(first);
         }
-
-        return stoi(digits);
+        return temp;
     }
 };
