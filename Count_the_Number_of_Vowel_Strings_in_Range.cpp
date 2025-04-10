@@ -1,11 +1,11 @@
 class Solution {
 public:
     int vowelStrings(vector<string>& words, int left, int right) {
-        unordered_ser<char> vowels = {'a','e','i','o','u'};
+        unordered_set<char> vowels = {'a','e','i','o','u'};
         int count = 0 ;
-        for(int i=0;i<words.size();i++){
+        for(int i=left;i<=right;i++){
             string word = words[i];
-            if(vowels.count(words.front()) && vowels.count(word.back())){
+            if(vowels.count(word.front()) && vowels.count(word.back())){
                 count++;
             }
             return count;
