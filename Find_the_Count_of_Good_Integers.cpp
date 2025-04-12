@@ -27,7 +27,7 @@ public:
         }
     }
 
-    // \U0001f4a5 Hidden Leaf’s Main Function
+    // \U0001f4a5 Hidden Leafâ€™s Main Function
     long long countGoodIntegers(int n, int k) {
         vector<string> validClones;
         string baseClone(n, '0');
