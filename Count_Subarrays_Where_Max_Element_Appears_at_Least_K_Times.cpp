@@ -16,6 +16,7 @@ public:
                 m[v[i]]--;
                 i++;
             }
+            j++;
         }
         return ans;
     }
