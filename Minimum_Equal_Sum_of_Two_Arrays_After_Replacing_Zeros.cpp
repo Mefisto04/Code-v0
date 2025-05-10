@@ -1,34 +1,26 @@
 class Solution {
-public:
-    long long minSum(vector<int>& nums1, vector<int>& nums2) {
-        ios_base::sync_with_stdio(false);
-        cin.tie(0); cout.tie(0);
-        
-        long long nums1_sum = 0, nums2_sum = 0;
-        long long nums1_zeroes = 0, nums2_zeroes = 0;
-
-        for (int x : nums1) {
-            if (x == 0) {
-                nums1_zeroes++;
-                nums1_sum++; // Replace 0 with 1
-            } else {
-                nums1_sum += x;
-            }
+    public long minSum(int[] nums1, int[] nums2) {
+        long nums1Zeroes = 0, nums2Zeroes = 0,sum1 = 0, sum2 = 0;
+        for(int i : nums1){
+            if(i == 0) nums1Zeroes++;
+            sum1 += i;
         }
 
-        for (int x : nums2) {
-            if (x == 0) {
-                nums2_zeroes++;
-                nums2_sum++; // Replace 0 with 1
-            } else {
-                nums2_sum += x;
-            }
+        for(int i : nums2){
+            if(i == 0) nums2Zeroes++;
+            sum2 += i;
         }
 
-        if ((nums1_zeroes == 0 && nums2_sum > nums1_sum) ||
-            (nums2_zeroes == 0 && nums1_sum > nums2_sum))
-            return -1;
+        long min1 = sum1 + nums1Zeroes;
+        long min2 = sum2 + nums2Zeroes;
 
-        return max(nums1_sum, nums2_sum);
+        if(nums1Zeroes == 0 && nums2Zeroes == 0){
+            return sum1 == sum2 ? sum1 : -1;
+        }else if(nums1Zeroes == 0){
+            return sum2 + nums2Zeroes <=sum1 ?sum1 : -1;
+        }else if (nums2Zeroes == 0){
+            return sum1 + nums1Zeroes <= sum2 ? sum2 : -1;
+        }
+        return Math.max(min1, min2);
     }
-};
+}
