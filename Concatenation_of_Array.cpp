@@ -5,7 +5,7 @@ public:
         vector<int>result(2*n);
         for(int i=0;i<n;i++){
             result.push_back(nums[i]);
-            result[i+n] = nums[i];
+            result[i+n].push_back(nums[i]);
         }
         return result;
     }
