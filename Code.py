@@ -16,8 +16,8 @@ HEADERS = {
 
 def fetch_leetcode_submissions():
     submissions = []
-    offset = 800  
-    limit = 800  
+    offset = 100  
+    limit = 100  
 
     while True:
         url = f"https://leetcode.com/api/submissions/?offset={offset}&limit={limit}"
