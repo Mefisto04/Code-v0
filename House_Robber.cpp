@@ -3,7 +3,7 @@ class Solution {
     int fun(vector<int>& nums, vector<int>& dp,int ind) {
         if(dp[ind]!=-1) return dp[ind];
         if(ind<0) return 0;
-        if(ind==0) return nums[ind];
+        if(ind==0) return a[ind];
         int pick = fun(nums,dp,ind-2)+nums[ind];
         int nonPick = fun(nums,dp,ind-1);
         return dp[ind] = max(pick,nonPick);
