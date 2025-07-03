@@ -1,54 +1,45 @@
 class Solution {
 public:
-    // Recursive function to mark all connected land cells as visited
-    void solve(int r, int c, vector<vector<char>>& grid, vector<vector<int>>& vis) {
-        int n = grid.size();
-        int m = grid[0].size();
+    void bfs(int n, int m, vector<vector<char>>& grid, vector<vector<int>>& visited) {
+        visited[n][m] = 1;
+        queue<pair<int, int>> q;
+        q.push({n, m}); 
+        int directions[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
         
-        // Mark current cell as visited
-        vis[r][c] = 1;
-        
-        // Define movements in up, down, left, and right directions
-        int dp1[4] = {1, -1, 0, 0};
-        int dp2[4] = {0, 0, -1, 1};
-        
-        // Check all four adjacent cells
-        for (int i = 0; i < 4; i++) {
-            int nr = dp1[i] + r; // new row
-            int nc = dp2[i] + c; // new column
+        while (!q.empty()) {
+            int row = q.front().first;
+            int col = q.front().second;
+            q.pop();
             
-            // Check if the adjacent cell is within the grid boundaries,
-            // unvisited, and contains land ('1')
-            if (nr >= 0 && nr < n && nc >= 0 && nc < m && !vis[nr][nc] && grid[nr][nc] == '1') {
-                // Recursively call solve function for the adjacent land cell
-                solve(nr, nc, grid, vis);
+            for (auto& dir : directions) {
+                int nrow = row + dir[0];
+                int ncol = col + dir[1];
+                
+                if (nrow >= 0 && nrow < grid.size() && ncol >= 0 && ncol < grid[0].size() &&
+                    !visited[nrow][ncol] && grid[nrow][ncol] == '1') {
+                    visited[nrow][ncol] = 1; 
+                    q.push({nrow, ncol});  
+                }
             }
         }
     }
-    
-    // Main function to count the number of islands
+
     int numIslands(vector<vector<char>>& grid) {
         int n = grid.size();
-        int m = grid[0].size();
-        int ans = 0;
+        int m = grid[0].size();  
         
-        // Matrix to keep track of visited cells
-        vector<vector<int>> vis(n, vector<int>(m, 0));
+        vector<vector<int>> visited(n, vector<int>(m, 0)); 
+        int count = 0;  
         
-        // Iterate through each cell in the grid
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                // If current cell is land ('1') and not visited
-                if (grid[i][j] == '1' && !vis[i][j]) {
-                    // Call solve function to mark all connected land cells as visited
-                    solve(i, j, grid, vis);
-                    // Increment island count
-                    ans++;
+                if (grid[i][j] == '1' && !visited[i][j]) {
+                    bfs(i, j, grid, visited);
+                    count++; 
                 }
             }
         }
         
-        // Return the total number of islands
-        return ans;
+        return count;
     }
 };
